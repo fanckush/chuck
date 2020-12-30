@@ -1,7 +1,22 @@
 <template>
   <vs-navbar class="main-nav" center-collapsed square>
-    <template #left> JOKE LOGO </template>
+    <template #left>
+      <!-- LOGO -->
+      <h4>JOKE LOGO</h4>
 
+      <!-- Nav pages -->
+      <vs-navbar-item @click="$router.push('/')" :active="active === 'home'">
+        Home
+      </vs-navbar-item>
+      <vs-navbar-item
+        :active="active === 'about'"
+        @click="$router.push('about')"
+      >
+        About
+      </vs-navbar-item>
+    </template>
+
+    <!-- random joke -->
     <h5 v-text="currentJoke" />
 
     <template #right>
@@ -13,9 +28,15 @@
 <script>
 export default {
   data: () => ({
-    active: 'guide',
     currentJoke: '',
   }),
+  computed: {
+    active() {
+      console.log('this.$route: ', this.$route)
+      if (this.$route.path.includes('about')) return 'about'
+      return 'home'
+    },
+  },
   methods: {
     async fetchJoke() {
       this.loading = true

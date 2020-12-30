@@ -10,6 +10,9 @@
       <ul class="jokes" ref="jokes">
         <li v-for="joke in paginatedJokes" :key="joke.id" class="joke">
           {{ joke.value }}
+          <a class="joke__email" :href="`mailto:?body=${joke.value}`">
+            <i class="bx bx-mail-send" />
+          </a>
         </li>
       </ul>
     </div>
@@ -89,5 +92,9 @@ export default {
   margin: 8px 0;
   border-radius: 8px;
   background-color: #f7f7f7;
+
+  &__email {
+    float: right;
+  }
 }
 </style>
